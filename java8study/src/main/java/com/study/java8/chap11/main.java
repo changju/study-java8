@@ -25,12 +25,14 @@ public class main {
 		ZoneId zone = ZoneId.systemDefault();
 		System.out.println("ZoneId.systemDefault(): " + zone);
 		ZonedDateTime zoneDateTime = instant.atZone(zone);
-		System.out.println("ZonedDateTime: " + zoneDateTime);
+		System.out.println("ZonedDateTime 1: " + zoneDateTime);
+		ZonedDateTime zoneDateTime2 = instant.atZone(ZoneId.of("UTC"));
+		System.out.println("ZonedDateTime 2: " + zoneDateTime2);
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////
 		// LocalDateTime.now(): 현재 시스템 Zone에 해당하는(로컬) 일시를 리턴한다.
 		LocalDateTime now = LocalDateTime.now();
-		System.out.println(now);
+		System.out.println("LocalDateTime: " + now);
 		
 		////////////////////////////////////////////////////////////////////////////////////////////////
 		// LocalDateTime.of(int, Month, int, int, int, int): 로컬의 특정 일시를 리턴한다.
@@ -40,14 +42,16 @@ public class main {
 		///////////////////////////////////////////////////////////////////////////////////////////////
 		// 특정 Zone의 특정 일시를 리턴
 		ZonedDateTime nowInKOrea = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
-		System.out.println(nowInKOrea);
+		System.out.println("ZonedDateTime: " + nowInKOrea);
 
 		// 기간의 차이를 표현하는 방법
 		// Period : 휴먼용 시간 비교
 		LocalDate today = LocalDate.now();
-		LocalDate thisYearBirthday = LocalDate.of(2021, Month.JANUARY, 15);
+		LocalDate thisYearBirthday = LocalDate.of(2022, Month.JANUARY, 15);
 		Period period = Period.between(today, thisYearBirthday);
 		System.out.println("===PERIOD 휴먼용 시간 비교시 ====");
+		System.out.println("from: " + today);
+		System.out.println("to: " + thisYearBirthday);
 		System.out.println(period.getDays());
 
 		Period until = today.until(thisYearBirthday);
@@ -64,9 +68,9 @@ public class main {
 
 		// 현재 시간을 패턴에 맞게 포맷팅하기.
 		LocalDateTime nowDateTime = LocalDateTime.now();
-		System.out.println(nowDateTime);
+		System.out.println("nowDateTime: " + nowDateTime);
 		DateTimeFormatter MMddyyyy = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-		System.out.println(nowDateTime.format(MMddyyyy));
+		System.out.println("MMddyyyy: " + nowDateTime.format(MMddyyyy));
 
 		LocalDate parse = LocalDate.parse("07/15/1982", MMddyyyy);
 		LocalDate plusDate = parse.plus(10, ChronoUnit.DAYS);

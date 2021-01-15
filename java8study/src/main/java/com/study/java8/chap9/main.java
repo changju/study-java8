@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
+import java.util.function.Predicate;
 
 import com.study.java8.chap9.OnlineClass;
 
@@ -72,8 +73,15 @@ public class main {
 		OnlineClass onlineClass6 = springOptional3.orElseThrow(IllegalArgumentException::new);
 		
 		System.out.println(onlineClass6.getTitle());
-		
+		/*
+		 * 인자값 하나를 받아서 true, false를 리턴을 해준다.
+		   Predicate<String> startWithChangju = (s) -> s.startsWith("cjlee");
+		 * */
+		// 아래 코드는 filter 함수에서 람다 함수에서 입력 인자로써 객체가 된다는 것을 의미한다.
+		// 생각을 해보면 입력 인자의 객체의 isClose를 호출하여 boolean 값을 리턴 한다는 의미다.
 		Optional<OnlineClass>  onlineClass7 = springOptional3.filter(OnlineClass::isClosed);
+		
+		// 입력 인자를 직접 명시하여 사용할때는 아래와 같이 사용한다.
 		Optional<OnlineClass>  onlineClass8 = springOptional3.filter(oc -> oc.isClosed());
 		System.out.println(onlineClass7.isPresent());
 		
