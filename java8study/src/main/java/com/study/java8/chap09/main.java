@@ -1,4 +1,4 @@
-package com.study.java8.chap9;
+package com.study.java8.chap09;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.function.Predicate;
 
-import com.study.java8.chap9.OnlineClass;
+import com.study.java8.chap09.OnlineClass;
 
 public class main {
 
@@ -47,7 +47,7 @@ public class main {
 		.findFirst();
 		
 		// Optional 내부에 값이 있으면 가져오고, 없으면 createNewClass 를 실행한다. 
-		// 단, 어이없게 createNewClass는 반드시 실행이 된다.그러나 객체는 있다면 가져온다.
+		// 단, 어이없게 createNewClass는 반드시 실행이 된다. 그러나 객체는 있다면 가져온다.
 		// 이러한 어이없는 상황이 안일어 났으면 할때 orElseGet 을 실행할 수 있다.
 		OnlineClass onlineClass2 = springOptional2.orElse(createNewClass());
 		System.out.println(onlineClass2.getTitle());
@@ -85,6 +85,8 @@ public class main {
 		Optional<OnlineClass>  onlineClass8 = springOptional3.filter(oc -> oc.isClosed());
 		System.out.println(onlineClass7.isPresent());
 		
+		// map이 Function 이고 public Integer getId() 는 인자가 없다.
+		// 좀 이상하게 보일 수 있지만, Function 의 첫 번째 인자는 OnlineClass 이기에 리턴에 형식만 맞으면 된다.
 		Optional<Integer> integer = springOptional3.map(OnlineClass::getId);
 		
 		// optional  을 리턴하면 flatMap을 사용한다.

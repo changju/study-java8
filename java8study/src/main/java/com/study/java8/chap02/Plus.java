@@ -1,4 +1,4 @@
-package com.study.java8.chap2;
+package com.study.java8.chap02;
 
 import java.util.function.Function;
 

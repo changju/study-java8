@@ -1,4 +1,4 @@
-package com.study.java8.chap6;
+package com.study.java8.chap06;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -43,7 +43,7 @@ public class main {
 		
 		long k = names.stream().map(String::toUpperCase).filter(s->s.startsWith("CH")).count();
 		System.out.println("k: " + k);
-		             
+		
 		// Consumer 리턴 타입이 없다.
 		// 함수형 인터페이스는 함수 형식이 맞으면 OK 이다.
 		names.forEach(System.out::println);

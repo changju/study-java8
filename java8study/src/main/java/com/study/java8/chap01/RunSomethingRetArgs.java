@@ -1,4 +1,4 @@
-package com.study.java8.chap1;
+package com.study.java8.chap01;
 
 // 함수형 인터페이스는 인터페이스가 하나만 있어야 한다.
 @FunctionalInterface

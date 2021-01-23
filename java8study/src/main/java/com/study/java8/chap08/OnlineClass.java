@@ -1,4 +1,4 @@
-package com.study.java8.chap8;
+package com.study.java8.chap08;
 
 public class OnlineClass {
 	private Integer id;

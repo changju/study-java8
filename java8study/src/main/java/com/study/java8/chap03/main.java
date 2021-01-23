@@ -1,10 +1,9 @@
-package com.study.java8.chap3;
+package com.study.java8.chap03;
 
 import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 
 public class main {
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

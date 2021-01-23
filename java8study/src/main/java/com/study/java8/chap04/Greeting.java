@@ -1,4 +1,4 @@
-package com.study.java8.chap4;
+package com.study.java8.chap04;
 
 public class Greeting {
 	private String name;

@@ -1,4 +1,4 @@
-package com.study.java8.chap8;
+package com.study.java8.chap08;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,6 +32,7 @@ public class main {
 		springClasses.add(new OnlineClass(4, "spring core", false));
 		springClasses.add(new OnlineClass(5, "rest api development", false));
 		
+		final String myName = "cjlee";
 		
 		System.out.println("spring으로 시작하는 수업");
 		
@@ -39,7 +40,11 @@ public class main {
 		// stream 타입으로 리턴하지 않는 것은 종료 오퍼레이션이다.
 		springClasses.stream()
 		.filter(oc -> oc.getTitle().startsWith("spring"))
-		.forEach(oc -> System.out.println(oc.getId()));
+		.forEach(oc -> {
+			System.out.println(myName);
+			System.out.println(oc.getId());
+			}
+		);
 		
 		
 		System.out.println("close 되지 않는 수업");
@@ -74,7 +79,7 @@ public class main {
 		
 		System.out.println("두 수업 목록에 들어있는 모든 수업 아이디 출력");
 		cjleeEvents.stream()
-		 .flatMap(Collection::stream) //리스트에 있는 OnlineClass를 flat 시킨다.
+		 .flatMap(Collection::stream) // 리스트에 있는 OnlineClass를 flat 시킨다.
 		 .forEach((oc) -> System.out.println(oc.getId()));
 		
 		System.out.println("10부터 1씩 증가하는 무제한 스트림 중에서 앞에 10개 빼고 최대 10개 까지만");

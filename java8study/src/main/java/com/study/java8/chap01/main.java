@@ -1,4 +1,4 @@
-package com.study.java8.chap1;
+package com.study.java8.chap01;
 
 public class main {
 

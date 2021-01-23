@@ -1,4 +1,4 @@
-package com.study.java8.chap4;
+package com.study.java8.chap04;
 
 import java.util.Arrays;
 import java.util.function.Function;
@@ -21,8 +21,12 @@ public class main {
 		// static 메서드 참조
 		UnaryOperator<String> hiMethodOperator = Greeting::hi;
 		
+		//아래 사항은 안 됨.
+		//UnaryOperator<String> h2 = Greeting.hi("hello");
+		
 		// 인스턴스 메서드 참조
 		UnaryOperator<String> h = greeting::hello;
+		
 		
 		// apply 를 해야 실제로 실행이 된다.
 		System.out.println(h.apply("changju"));

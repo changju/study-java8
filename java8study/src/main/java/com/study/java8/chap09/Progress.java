@@ -1,4 +1,4 @@
-package com.study.java8.chap9;
+package com.study.java8.chap09;
 
 import java.time.Duration;
 
