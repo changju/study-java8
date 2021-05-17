@@ -93,9 +93,12 @@ public class main {
 		System.out.println(test);
 		
 		System.out.println("스프링 수업 중에 제목이 spring이 들어간 제목만 모아서 List로 만들기");
-		List<String> spring = springClasses.stream()
+		List<Object> spring = springClasses.stream()
 		  .filter(oc -> oc.getTitle().contains("spring"))
 		  .map(OnlineClass::getTitle) //.map(oc -> oc.getTitle()) // OnlineClass를 받아서 문자열로 바꾼 것
+		                              // map 은 기본으로 함수의 형식이 <R> Stream<R> map(Function<? super T, ? extends R> var1) 이다.
+		  							  // 따라서 함수의 쓰임이 정해질때 ?가 채워지게 되는 것 이다.
+		  						      // 여기서는 getTitle의 Return이 String 이기 때문에 String Type 으로 되는 것이다.
 		  .collect(Collectors.toList());
 		
 		spring.forEach(System.out::println);

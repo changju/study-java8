@@ -46,7 +46,7 @@ public class main {
 		// return 이 있는 것, future 만 정의한 것이기 때문에 아무런 일이 발생하지 않는다.  get 같은 것으로 호출을 해줘야 한다.
 		// thenApply 콜백, 우리가 받은 값을 다른 값으로 변경하는 것.
 		// java5 future에서는 callback 을 .get 호출 이전에 정의가 불가능 했으나, java8 의 CompletableFuture는 가능
-		// thenApply 에는 리턴이 있는 Function 이 들어간다.
+		// thenApply 에는 리턴이 있는 Function 이 들어간다. thenApply는 main thread 이다.
 		CompletableFuture<String> cFuture5 = CompletableFuture.supplyAsync(() -> {
 			System.out.println("Hello5 " + Thread.currentThread().getName()); // ForkJoinPool worker thread
 			return "Hello5";
@@ -55,7 +55,7 @@ public class main {
 			return s.toUpperCase();
 		});
 		
-		System.out.println("return cFuture5: " + cFuture5.get());
+		System.out.println("return cFuture5: " + cFuture5.get() +", threadId: " + Thread.currentThread().getName());
 		
 		// return 이 있는 것, future 만 정의한 것이기 때문에 아무런 일이 발생하지 않는다.  get 같은 것으로 호출을 해줘야 한다.
 		// thenAccept 콜백, 리턴이 없는 Consumer 가 들어간다.

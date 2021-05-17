@@ -32,12 +32,14 @@ public class main {
 		System.out.println(h.apply("changju"));
 		
 		// 입력값은 없지만, 결과값이 있는경우.(아래  .get 을 해야 만들어진다, 왜냐 참조를 하는 것 이기 때문에)
+		// 인자가 없는 생성자를 호출한다.
 		Supplier<Greeting> newGreeting= Greeting::new;
 		
 		Greeting gree = newGreeting.get();
 		System.out.println(gree.getName());
 		
 		// 문자열을 받는 생성자 참조
+		// 인자가 String 인 함수를 참조한다.
 		Function<String, Greeting> cjleeGretting = Greeting::new;
 		Greeting ggg = cjleeGretting.apply("cjlee");
 		System.out.println(ggg.getName());
