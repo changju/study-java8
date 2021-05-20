@@ -17,7 +17,9 @@ import java.util.TimeZone;
 public class main {
 
 	public static void main(String[] args) {
-
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////
+		// Instant 는 기계용시간이다, 기계용 시간 사용하기
 		Instant instant = Instant.now();
 		System.out.println("Instant.now(): "+instant); // UTC & GMT 기준시에서 가져온다.
 
@@ -29,15 +31,18 @@ public class main {
 		ZonedDateTime zoneDateTime2 = instant.atZone(ZoneId.of("UTC"));
 		System.out.println("ZonedDateTime 2: " + zoneDateTime2);
 		
+		
 		////////////////////////////////////////////////////////////////////////////////////////////////
+		// 휴먼용 시간 사용하기
 		// LocalDateTime.now(): 현재 시스템 Zone에 해당하는(로컬) 일시를 리턴한다.
 		LocalDateTime now = LocalDateTime.now();
 		System.out.println("LocalDateTime: " + now);
 		
+		
 		////////////////////////////////////////////////////////////////////////////////////////////////
 		// LocalDateTime.of(int, Month, int, int, int, int): 로컬의 특정 일시를 리턴한다.
-		LocalDateTime bth = LocalDateTime.of(1982, Month.AUGUST, 17, 1, 1);
-		System.out.println(bth);
+		LocalDateTime birthday = LocalDateTime.of(1982, Month.AUGUST, 17, 1, 1);
+		System.out.println(birthday);
 		
 		///////////////////////////////////////////////////////////////////////////////////////////////
 		// 특정 Zone의 특정 일시를 리턴
@@ -47,17 +52,17 @@ public class main {
 		// 기간의 차이를 표현하는 방법
 		// Period : 휴먼용 시간 비교
 		LocalDate today = LocalDate.now();
-		LocalDate thisYearBirthday = LocalDate.of(2022, Month.JANUARY, 15);
+		LocalDate thisYearBirthday = LocalDate.of(2023, Month.JANUARY, 15);
 		Period period = Period.between(today, thisYearBirthday);
 		System.out.println("===PERIOD 휴먼용 시간 비교시 ====");
 		System.out.println("from: " + today);
 		System.out.println("to: " + thisYearBirthday);
-		System.out.println(period.getDays());
+		System.out.println("means: " + period.getDays());
 
 		Period until = today.until(thisYearBirthday);
 		System.out.println(until.get(ChronoUnit.DAYS));
 
-		// Period :휴먼용 시간 비교
+		// Period : 휴먼용 시간 비교
 		// Duration : 기계 시간 비교
 		// 두 초간의 몇 초가 차이나는지 확인.
 		Instant nowInstant = Instant.now();
@@ -72,6 +77,7 @@ public class main {
 		DateTimeFormatter MMddyyyy = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 		System.out.println("MMddyyyy: " + nowDateTime.format(MMddyyyy));
 
+		// 파싱하
 		LocalDate parse = LocalDate.parse("07/15/1982", MMddyyyy);
 		LocalDate plusDate = parse.plus(10, ChronoUnit.DAYS);
 		System.out.println(parse);
@@ -84,8 +90,8 @@ public class main {
 		LocalDateTime dateTime = gregorianCalendar.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
 		ZonedDateTime zndDtm = gregorianCalendar.toInstant().atZone(ZoneId.systemDefault());
 		GregorianCalendar oldGregorianCalendar = GregorianCalendar.from(zndDtm);
-
-		// 레거시 TimeZone 지원
+		
+		//  신규 api - ZoneId 를 레거시 TimeZone 으로 변경
 		ZoneId zoneId = TimeZone.getTimeZone("PST").toZoneId();
 		TimeZone tz = TimeZone.getTimeZone(zoneId);
 

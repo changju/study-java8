@@ -12,7 +12,7 @@ import java.util.function.UnaryOperator;
  * Java에서 미리 정의해 놓은 것이 있다. 
  * 
     Function<T, R> // 값을 하나 받아서 하나의 값을 리턴을 한다.
-	BiFunction<T, U, R> // T,U 를 입력값으로 받은 후 R로 리턴한다.
+	BiFunction<T, U, R> // T, U 를 입력값으로 받은 후 R로 리턴한다.
 	Consumer<T> // 리턴이 없다
 	Supplier<T> : Supplier 함수적 인터페이스는 매개값은 없고 리턴값이 있는 getXXX() 메소드를 가지고 있다.
 	Predicate<T> // Boolean 값으로 리턴이 된다.
@@ -44,12 +44,12 @@ public class main {
 		System.out.println("[andThen]");
 		System.out.println(plus20.andThen(multiply2).apply(2));
 		
-		// 리턴 타입이 없다.
+		// 리턴 타입이 없으며, 소비를 하는 격임.
 		Consumer<Integer> printT = (i) -> System.out.println(i);
 		System.out.println("Consumer: 10");
 		printT.accept(10);
 		
-		// 받아오고자하는 값을 정의를 한다.
+		// 받아오고자하는 값을 정의를 하며, 제공을 하는 격임.
 		Supplier<Integer> get10 = () -> 10;
 		System.out.println("Supplier: 10");
 		System.out.println(get10.get());

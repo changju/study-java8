@@ -1,5 +1,20 @@
 package com.study.java8.chap05;
+/*
+public interface Foo {
+	
+	
+	default void printNameUpperCase() {
+		System.out.print(getName().toUpperCase());
+	}
 
+	static void printAnything() {
+		System.out.print("printAnything");
+	}
+
+	String getName();
+}
+  
+ */
 public class DefaultFoo implements Foo {
 	
 	String name;

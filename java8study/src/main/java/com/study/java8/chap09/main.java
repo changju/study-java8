@@ -21,9 +21,10 @@ public class main {
 		springClasses.add(new OnlineClass(4, "spring core", false));
 		springClasses.add(new OnlineClass(5, "rest api development", false));
 		
-		OptionalInt oi = OptionalInt.of(10); //boxing unboxing 이 없도록 사용을 권장
+		//Optional.of(10) 도 가능하지만, OptionalInt.of(10) 을 사용함으로써, boxing unboxing 이 없도록 사용할 수 있기에 이를 권장한다.
+		OptionalInt oi = OptionalInt.of(10); 
 		
-		// 옵셔널을 리턴하는 종료형 오퍼레이션. spring이 있을 수 도 있고 없을 수 도 있기 때문에 Optional이 잘 어울린다.
+		// Optional 리턴하는 종료형 오퍼레이션. spring이 있을 수 도 있고 없을 수 도 있기 때문에 Optional이 잘 어울린다.
 		Optional<OnlineClass> springOptional = springClasses.stream()
 		.filter(oc -> oc.getTitle().startsWith("spring"))
 		.findFirst();
@@ -62,7 +63,6 @@ public class main {
 		
 		OnlineClass onlineClass4 = springOptional3.orElseGet(main::createNewClass);
 		System.out.println(onlineClass4.getTitle());
-		
 
 		OnlineClass onlineClass5 = springOptional3.orElseThrow(() -> {
 			return new IllegalArgumentException();

@@ -25,10 +25,11 @@ public class main {
 			return "World";
 		});
 
-		// fHello의 후 리턴 값을 전달 한다.  fWorld 를 인자로 넣으면 에러 걸린다 이유는 함수의 형태가 안맞기 때문이다.
+		// fHello의 후 리턴 값을 전달 한다. fWorld 를 인자로 넣으면 에러 걸린다 이유는 함수의 형태가 안맞기 때문이다.
+		// method reference 로 변경
 		fHello.thenCompose(s -> getWorld(s));
-		
-		// 입력 값, 출력값이 한개인 Function
+
+		// 입력 값, 출력값이 한개인 mehtod reference 로 변경 후
 		CompletableFuture<String> future = fHello.thenCompose(main::getWorld);
 		System.out.println(future.get());
 
@@ -43,7 +44,7 @@ public class main {
 
 		System.out.println("cFuture1: " + cFuture1.get());
 		System.out.println("cFuture2: " + cFuture2.get());
-		
+
 		////////////////////////////////////////
 		// task가 둘 이상일때 여러 task 를 모두 합쳐서 처리한다.
 		// allOf에 넘긴 task 가 전부 끝났을때 처리.
@@ -58,64 +59,69 @@ public class main {
 		});
 
 		// aoFuture의 thenAccept 하여 null 출력 후 .get으로 다시한번 호출.
-		// 모든 TASK 들의 결과가 동일한 타입이라는 보장이 없고, 그중에 어떤것은 에러가 발생했을 수 있기 때문에 결과가 무의미하여 결과가 NULL이다.
+		// 모든 TASK 들의 결과가 동일한 타입이라는 보장이 없고, 그중에 어떤것은 에러가 발생했을 수 있기 때문에 결과가 무의미하여 결과가
+		// NULL이다.
 		CompletableFuture<Void> aoFuture = CompletableFuture.allOf(aoHello, aoWorld).thenAccept(System.out::println);
 		System.out.println(aoFuture.get());
-		
+
 		// 이 결과 값을 NULL이 아닌 모두 받고 싶을때.. 아래와 같이 처리
 		// .thenApply 호출 시점에는 모든 Future의 처리가 끝났을 경우이다.
 		List<CompletableFuture<String>> futures = Arrays.asList(aoHello, aoWorld);
 		CompletableFuture[] futuresArray = futures.toArray(new CompletableFuture[futures.size()]);
-		CompletableFuture<List<String>> results = CompletableFuture.allOf(futuresArray).thenApply(v -> {
-			//return futures.stream().map(f -> f.join());
-			return futures.stream().
-					map(CompletableFuture::join).
-					collect(Collectors.toList());
-			
+		CompletableFuture<List<String>> results = CompletableFuture.allOf(futuresArray)
+				.thenApply(v -> {
+					// return futures.stream().map(f -> f.join()).collect(Collectors.toList());
+					return futures.stream().map(CompletableFuture::join).collect(Collectors.toList());
+
 		});
 		List<String> objs = results.get();
 		results.get().forEach(System.out::println);
-		
-		// 둘다 호출을 하는데, 둘 중 하나 먼저 호출되어 끝나는 것 처리한다. 
+
+		// 둘다 호출을 하는데, 둘 중 하나 먼저 호출되어 끝나는 것 처리한다.
 		CompletableFuture<Void> future3 = CompletableFuture.anyOf(aoHello, aoWorld).thenAccept((s) -> {
-			System.out.println("VVV "+s);
+			System.out.println("VVV " + s);
 		});
 		future3.get();
 		
+		// 둘다 호출을 하는데, 둘 중 하나 먼저 호출되어 끝나는 것 처리한다.
+		CompletableFuture<Void> future4 = CompletableFuture.anyOf(aoHello, aoWorld).thenAccept(System.out::println);
+		future3.get();
+
 		// 비동기 처리작업을 하는데 에러가 발생하면..
 		boolean throwError = true;
 		CompletableFuture<String> hello = CompletableFuture.supplyAsync(() -> {
-			if(throwError) {
+			if (throwError) {
 				throw new IllegalArgumentException();
 			}
 			System.out.println("Hello" + Thread.currentThread().getName());
 			return "hello";
-			
+
 		}).exceptionally(ex -> {
 			System.out.println(ex);
 			return "Error Default";
 		});
-		
+
 		System.out.println(hello.get());
-		
+
 		// 비동기 처리작업을 하는데 에러가 발생하면, 좀 더 제너럴한 Handle로 처리하기.
-		// 정상적인 경우, 에러를 발생했을 경우 처럼 두 경우 모두 사용.
+		// 정상적인 경우, 에러를 발생했을 경우 처럼 두 경우 모두 Handle 내에서 정의하여 처리 가능하다.
 		// BIFunction 이 들어오고 첫번째는 정상적인 경우, 두 번째인 경우 비정상적인 경우가 들어온다.
 		CompletableFuture<String> hello2 = CompletableFuture.supplyAsync(() -> {
-			if(throwError) {
+			if (throwError) {
 				throw new IllegalArgumentException();
 			}
 			System.out.println("Hello2" + Thread.currentThread().getName());
 			return "hello2";
-			
+
 		}).handle((result, ex) -> {
-			if(ex != null) {
+			// 에러일 경우
+			if (ex != null) {
 				System.out.println(ex);
 				return "ERROR!";
 			}
 			return result;
 		});
-		
+
 		System.out.println(hello2.get());
 	}
 

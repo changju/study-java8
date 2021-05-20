@@ -53,6 +53,7 @@ public class main {
 		.forEach(oc -> System.out.println(oc.getId()));
 		
 		/*
+		// 임의의 객체의 메서드 레퍼런스 를 한다.
 		springClasses.stream()
 		.filter(Predicate.not(OnlineClass::isClosed))
 		.forEach(oc -> System.out.println(oc.getId()));
@@ -64,8 +65,8 @@ public class main {
 		// map 이후 foreach 에는 문자열이 들어온다.
 		System.out.println("수업 이름만 모아서 스트림 만들기");
 		springClasses.stream()
-		.map(oc -> oc.getTitle())
-		.forEach(System.out::println);
+		.map(OnlineClass::getTitle) //다음과 같이 해도 .map(oc -> oc.getTitle())
+		.forEach(System.out::println); // 메서드 레퍼런스로 표현하는 방법, foreach 는 종료형 operator 이다.
 		
 		List<OnlineClass> javaClasses = new ArrayList<>();
 		javaClasses.add(new OnlineClass(6, "The java, test", true));
@@ -76,6 +77,13 @@ public class main {
 		List<List<OnlineClass>> cjleeEvents = new ArrayList<>();
 		cjleeEvents.add(springClasses);
 		cjleeEvents.add(javaClasses);
+		
+		
+		System.out.println("두 수업 목록에 들어있는 모든 수업 아이디 출력");
+		cjleeEvents.stream()
+		 .flatMap((list) -> list.stream()) // 리스트에 있는 OnlineClass를 flat 시킨다.
+		 .forEach((oc) -> System.out.println(oc.getId()));
+		
 		
 		System.out.println("두 수업 목록에 들어있는 모든 수업 아이디 출력");
 		cjleeEvents.stream()
@@ -92,15 +100,18 @@ public class main {
 		boolean test = javaClasses.stream().anyMatch(oc -> oc.getTitle().contains("Test"));
 		System.out.println(test);
 		
+		// .collect : 종료 오퍼레이션
 		System.out.println("스프링 수업 중에 제목이 spring이 들어간 제목만 모아서 List로 만들기");
 		List<Object> spring = springClasses.stream()
 		  .filter(oc -> oc.getTitle().contains("spring"))
-		  .map(OnlineClass::getTitle) //.map(oc -> oc.getTitle()) // OnlineClass를 받아서 문자열로 바꾼 것
+		  .map(OnlineClass::getTitle) 
+		       						  //.map(oc -> oc.getTitle()) // OnlineClass를 받아서 문자열로 바꾼 것, method reference 로 변경 하면 OnlineClass::getTitle 
 		                              // map 은 기본으로 함수의 형식이 <R> Stream<R> map(Function<? super T, ? extends R> var1) 이다.
 		  							  // 따라서 함수의 쓰임이 정해질때 ?가 채워지게 되는 것 이다.
 		  						      // 여기서는 getTitle의 Return이 String 이기 때문에 String Type 으로 되는 것이다.
 		  .collect(Collectors.toList());
 		
+		// .orEach : 종료 오퍼레이
 		spring.forEach(System.out::println);
 		
 	}

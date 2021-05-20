@@ -31,7 +31,7 @@ public class main {
 		runSomethingInnerClass2.doIt();
 		runSomethingInnerClass2.doIt();
 
-		// 함수형 인터페이스를 구현할때 쓸 수 있는 람다형태의 표현식
+		// 함수형 인터페이스를 구현할때 쓸 수 있는 람다형태의 표현식, Lambda 표현식에 정의된 것은 특수한 형태의 오브젝트라 할 수 있다.
 		RunSomething runSomething1 = () -> System.out.println("hello");
 		RunSomething runSomething2 = () -> {
 			System.out.println("hello2");
@@ -46,6 +46,7 @@ public class main {
 			return num + 10;
 		};
 		
+		// 리턴 없이 한줄로 가능하다.
 		RunSomethingRetArgs runSomethingRetArgs2 = (num) -> num + 10;
 		
 		// 함수형 프로그래밍은 값은 값이 들어갔으면 같은 값이 나와야 한다.

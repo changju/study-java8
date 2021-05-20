@@ -6,7 +6,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /* Executors
- * 고수준 (High-Level) Concurrency 프로그래밍
+ * 저수준 (Low-Level) : 직접 Thread 를 상속하여 혹은 Runnable 을 만들어실행.
+ * 고수준 (High-Level) : Concurrency 프로그래밍
    쓰레드를 만들고 관리하는 작업을 애플리케이션에서 분리.
    그런 기능을 Executors에게 위임.
 */
@@ -19,7 +20,7 @@ public class main {
 		// ExecutorService의 실행은 execute 나 submit 을 해야 한다.
 		ExecutorService executorService = Executors.newSingleThreadExecutor();
 		executorService.execute(() -> {
-			System.out.println("Thread : " + Thread.currentThread().getName());
+			System.out.println("Thread 1 : " + Thread.currentThread().getName());
 		});
 		
 		// shutdown()은 graceful shutdown 이다. 
@@ -53,9 +54,9 @@ public class main {
 		/// 스케쥴 1초 후 2초 간격으로 출력
 		ScheduledExecutorService scdExecutorService1 = Executors.newSingleThreadScheduledExecutor();
 		scdExecutorService1.scheduleAtFixedRate(getRunnable("Hello~~"), 1, 2, TimeUnit.SECONDS);
-		//scdExecutorService1.shutdown();
+		//scdExecutorService1.shutdown(); <-이 코드가 "scdExecutorService1" 가 바로 종료 되어버린다.
 		
-		// 결과값을 가져오려면 Runnable은 안되고, Callable 을 사용하면 가능하다.
+		// Thread 처리내 결과값을 가져오려면 Runnable은 안되고, 1.8 에서 신규로 생성된 Callable 을 사용하면 리턴 결과를 받아올 수 있다.
 	}
 	
 	public static Runnable getRunnable(String message) {

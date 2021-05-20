@@ -9,6 +9,4 @@ public class Plus implements Function<Integer, Integer>{
 		// TODO Auto-generated method stub
 		return arg0 + 10;
 	}
-	
-
 }

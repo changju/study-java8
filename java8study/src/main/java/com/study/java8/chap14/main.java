@@ -13,7 +13,7 @@ public class main {
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		ExecutorService executorService = Executors.newSingleThreadExecutor();
 		
-		// 아래와 같이 정의도 가능하지만, 함수형 인터페이기 때문에 람다로 정의도 가능하다.
+		// 아래와 같이 정의도 가능하지만, 함수형 인터페이스 이기 때문에 람다로 정의도 가능하다.
 		Callable<String> hello1 = new Callable<String>() {
 			
 			@Override
@@ -34,8 +34,8 @@ public class main {
 		System.out.println("Started!!!!");
 		
 		// cancel 후 get을 하여 가져올 수 없다. cancel 상태에서 만약 get을 호출하면 Exception이 발생한다.
-		//submit.cancel(true);
-		//submit.cancel(false);
+		//submit.cancel(true); // 현재 진행 중인 작업을 인터럽트 하며 종료
+		//submit.cancel(false); // 현재 진행중인 작업을 기다리며 종
 		
 		// Future 의 get() 은 결과 값을 가져올때까지 가다리는 블록킹 콜이다.
 		// 마냥 기다릴 수 없으니 isDone() 으로 완료 여부를 알 수 있다.
@@ -68,15 +68,18 @@ public class main {
 		// Thread pool 을 4개를 줘야 invokeAll이 정상수행이 된다.
 		ExecutorService executorService2 = Executors.newFixedThreadPool(4);
 		List<Future<String>> futures = executorService2.invokeAll(Arrays.asList(hello2, hello3, hello4));
+		System.out.println("invokeAll");
 		for(Future<String> f : futures) {
 			System.out.println(f.get());
 		}
 		
 		//invokeAny 는 모든것을 블럭하지 않고 가장 먼저 끝나는 녀석이 있으면 끝낸다.
 		String s = executorService2.invokeAny(Arrays.asList(hello2, hello3, hello4));
+		System.out.println("invokeAny");
 		System.out.println(s);
 		
 		executorService.shutdown();
+		executorService2.shutdown();
 
 	}
 

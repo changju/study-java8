@@ -17,7 +17,7 @@ public class main {
 		System.out.println(retVal);
 		
 		// CompletableFuture 는 Fork join poll에 있는 common thread를 사용하게 된다.
-		
+		// 외부에서 Complete 를 할 수 있음.
 		CompletableFuture<String> cFuture1 = new CompletableFuture<String>();
 		cFuture1.complete("cjlee1"); // cFuture 의 기본값을 명시적으로 cjlee 로 하였고, 끝내게 된 것이다.
 		System.out.println(cFuture1.get());
@@ -26,7 +26,8 @@ public class main {
 		CompletableFuture<String> cFuture2 = CompletableFuture.completedFuture("cjlee2");
 		System.out.println(cFuture2.get());
 		
-		// return 이 없는 것, future 만 정의한 것이기 때문에 아무런 일이 발생하지 않는다.  실행을 하게 하기 위해서는 get 같은 것으로 호출을 해줘야 한다.
+		// return 이 없는 작업을 할 경, future 만 정의한 것이기 때문에 아무런 일이 발생하지 않는다. 
+		// 작업이 수행이 이뤄지기 위해서는 (실행을 하게 하기 위해서는) get 같은 것으로 호출을 해줘야 한다.
 		// 아래 CompletaFunture 는 Runnable
 		CompletableFuture<Void> cFuture3 = CompletableFuture.runAsync(() -> {
 			System.out.println("Hello " + Thread.currentThread().getName());
@@ -34,7 +35,7 @@ public class main {
 		});
 		cFuture3.get();
 		
-		// return 이 있는 것, future 만 정의한 것이기 때문에 아무런 일이 발생하지 않는다.  get 같은 것으로 호출을 해줘야 한다.
+		// return 이 있는 작업을 할 경우, future 만 정의한 것이기 때문에 아무런 일이 발생하지 않는다.  get 같은 것으로 호출을 해줘야 한다.
 		CompletableFuture<String> cFuture4 = CompletableFuture.supplyAsync(() -> {
 			System.out.println("Hello4 " + Thread.currentThread().getName());
 			return "Hello4";
@@ -57,7 +58,7 @@ public class main {
 		
 		System.out.println("return cFuture5: " + cFuture5.get() +", threadId: " + Thread.currentThread().getName());
 		
-		// return 이 있는 것, future 만 정의한 것이기 때문에 아무런 일이 발생하지 않는다.  get 같은 것으로 호출을 해줘야 한다.
+		// return 이 없는 경우, future 만 정의한 것이기 때문에 아무런 일이 발생하지 않는다.  get 같은 것으로 호출을 해줘야 한다.
 		// thenAccept 콜백, 리턴이 없는 Consumer 가 들어간다.
 		CompletableFuture<Void> cFuture6 = CompletableFuture.supplyAsync(() -> {
 			System.out.println("Hello6 " + Thread.currentThread().getName());
@@ -69,7 +70,7 @@ public class main {
 		
 		System.out.println("return cFuture6: " + cFuture6.get()); // return 이 없기 때문에 null 리턴 됨.
 		
-		// return 이 있는 것, future 만 정의한 것이기 때문에 아무런 일이 발생하지 않는다.  get 같은 것으로 호출을 해줘야 한다.
+		// return 이 있없고 무엇인가를 하기만 하면 될 경우, future 만 정의한 것이기 때문에 아무런 일이 발생하지 않는다.  get 같은 것으로 호출을 해줘야 한다.
 		// thenRun 콜백, 인자값으로 Runnable 이다. 하여, 인자값 및 리턴값이 없다.
 		CompletableFuture<Void> cFuture7 = CompletableFuture.supplyAsync(() -> {
 			System.out.println("Hello7 " + Thread.currentThread().getName());

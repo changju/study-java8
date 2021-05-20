@@ -1,0 +1,33 @@
+# Java8
+## 3부 Stream
+### 8. Stream 소개
+
+  - Stream
+    - sequence of elements supporting sequential and parallel aggregate operations
+    - 데이터를 담고 있는 저장소(컬렉션)이 아니다.
+    - Functional in nature, 스트림이 처리하는 데이터 소스를 변경하지 않는다.
+    - 스트림으로 처리하는 데이터는 오직 한번만 처리한다.
+    - 무제한일 수도 있다. (Short Circuit 메소드를 사용해서 제한할 수 있다.)
+      - 앞에 몇개만 보겠다 이런것.
+    - 중개 오퍼레이션은 근분적으로 lazy 하다.
+      - 종료형 오퍼레이션이 발생하기 전까지는 수행하지 않기 때문에 Lazy 하다는 것 이다.
+    - 손쉽게 병렬 처리할 수 있다.
+
+  - 스트림 파이프라인
+    - 0 또는 다수의 중개 오퍼레이션 (intermediate operation)과 한개의 종료 오퍼레이션 (terminal operation) 으로 구성
+    - 스트림의 데이터 소스는 오직 터미널 오퍼레이션을 실행할 때에만 처리한다.
+
+  - 중개 오퍼레이션
+    - **Stream을 리턴한다.**
+    - Stateless / Stateful 오퍼레이션으로 더 상세하게 구분할 수도 있다. (대부분은 Stateless지만 distinct나 sorted 처럼 이전 소스 데이터를 참조해야 하는 오퍼레이션은 Stateful 오포레이션이다.)
+    - filter, map, limit, skip, sorted, ...
+
+  - 종료 오퍼레이션
+    - **Stream 을 리턴하지 않는다.**
+    - collect, allMatch, count, forEach, min, max, ...
+
+  - 참조
+    - https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html
+    - https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html
+
+

@@ -46,10 +46,15 @@ public class main {
 		
 		// Consumer 리턴 타입이 없다.
 		// 함수형 인터페이스는 함수 형식이 맞으면 OK 이다.
+		// forEach : 종료 오퍼레이션.
 		names.forEach(System.out::println);
 		names.forEach(main::outputs);
 		
 		// Comparator 함수 인터페이스..
+		// * 많이 해깔리는 포인트임!!!
+		// 이경우는 임의 객체의 인스턴스 메소드 참조하는 경우이다. 형태는 "타입::인스턴스 메소드" 를 따른다.
+		// 즉 위의 o1이 "C" 라는 임의의 객체로 되어지고 인자로 "B"가 들어온다.
+		//       o1에 "B" 라는 임의의 객체로 되어지고 인자로 "A"가 들어온다.
 		Comparator<String> compareToIgnoreCase = String::compareToIgnoreCase;
 		names.sort(compareToIgnoreCase.reversed()); 
 	}

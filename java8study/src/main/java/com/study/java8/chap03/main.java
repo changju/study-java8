@@ -6,10 +6,8 @@ import java.util.function.IntConsumer;
 public class main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
 		main m = new main();
 		m.run();
-
 	}
 
 	private void run() {
@@ -37,6 +35,7 @@ public class main {
 			// 람다에서 로컬변수 참조
 			System.out.println(i + baseNumber);
 		};
+		
 
 		printInt.accept(10);
 
