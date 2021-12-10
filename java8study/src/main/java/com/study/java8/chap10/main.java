@@ -14,7 +14,7 @@ public class main {
 		
 		// Date 에서 time 을 가져오는 것이 이상하다.
 		// 기계용 시간
-		long time  = date.getTime(); //timestamp(ms) 기계용 시간을 제공함.
+		long time  = date.getTime(); // timestamp(ms) 기계용 시간을 제공함.
 		System.out.println(date);
 		System.out.println(time);
 		

@@ -50,17 +50,20 @@ public class main {
 		scdExecutorService.schedule(getRunnable("Hello"), 5, TimeUnit.SECONDS);
 		scdExecutorService.shutdown();
 		
+		
 		////////////////////////////////////////////////////////
 		/// 스케쥴 1초 후 2초 간격으로 출력
 		ScheduledExecutorService scdExecutorService1 = Executors.newSingleThreadScheduledExecutor();
 		scdExecutorService1.scheduleAtFixedRate(getRunnable("Hello~~"), 1, 2, TimeUnit.SECONDS);
+		scdExecutorService1.scheduleAtFixedRate(getRunnable("Hello~~"), 1, 2, TimeUnit.SECONDS);
+		scdExecutorService1.scheduleAtFixedRate(()->{System.out.println("helloworld");}, 1, 2, TimeUnit.SECONDS);
 		//scdExecutorService1.shutdown(); <-이 코드가 "scdExecutorService1" 가 바로 종료 되어버린다.
 		
 		// Thread 처리내 결과값을 가져오려면 Runnable은 안되고, 1.8 에서 신규로 생성된 Callable 을 사용하면 리턴 결과를 받아올 수 있다.
 	}
 	
 	public static Runnable getRunnable(String message) {
-		return () -> System.out.println(message + Thread.currentThread().getName());
+		return () -> System.out.println(message +": "+ Thread.currentThread().getName());
 	}
 
 }

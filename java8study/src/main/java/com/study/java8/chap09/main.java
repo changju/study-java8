@@ -42,6 +42,9 @@ public class main {
 			System.out.println(oc.getTitle());
 			}
 		);
+		System.out.println("next start!!");
+		springOptional.ifPresent(OnlineClass::getTitle);
+		System.out.println("next end!!");
 		
 		Optional<OnlineClass> springOptional2 = springClasses.stream()
 		.filter(oc -> oc.getTitle().startsWith("spring"))

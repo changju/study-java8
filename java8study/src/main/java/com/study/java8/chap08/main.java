@@ -65,7 +65,7 @@ public class main {
 		// map 이후 foreach 에는 문자열이 들어온다.
 		System.out.println("수업 이름만 모아서 스트림 만들기");
 		springClasses.stream()
-		.map(OnlineClass::getTitle) //다음과 같이 해도 .map(oc -> oc.getTitle())
+		.map(OnlineClass::getTitle) // 다음과 같이 해도 .map(oc -> oc.getTitle())
 		.forEach(System.out::println); // 메서드 레퍼런스로 표현하는 방법, foreach 는 종료형 operator 이다.
 		
 		List<OnlineClass> javaClasses = new ArrayList<>();

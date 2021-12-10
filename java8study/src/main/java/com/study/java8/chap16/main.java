@@ -22,14 +22,18 @@ public class main {
 
 		CompletableFuture<String> fWorld = CompletableFuture.supplyAsync(() -> {
 			System.out.println("World " + Thread.currentThread().getName());
-			return "World";
+			String n = "world";
+			return n;
 		});
 
 		// fHello의 후 리턴 값을 전달 한다. fWorld 를 인자로 넣으면 에러 걸린다 이유는 함수의 형태가 안맞기 때문이다.
 		// method reference 로 변경
+		System.out.println("===getworld - 1");
 		fHello.thenCompose(s -> getWorld(s));
+		System.out.println(fHello.get());
 
 		// 입력 값, 출력값이 한개인 mehtod reference 로 변경 후
+		System.out.println("===getworld - 2");
 		CompletableFuture<String> future = fHello.thenCompose(main::getWorld);
 		System.out.println(future.get());
 
@@ -68,10 +72,9 @@ public class main {
 		// .thenApply 호출 시점에는 모든 Future의 처리가 끝났을 경우이다.
 		List<CompletableFuture<String>> futures = Arrays.asList(aoHello, aoWorld);
 		CompletableFuture[] futuresArray = futures.toArray(new CompletableFuture[futures.size()]);
-		CompletableFuture<List<String>> results = CompletableFuture.allOf(futuresArray)
-				.thenApply(v -> {
-					// return futures.stream().map(f -> f.join()).collect(Collectors.toList());
-					return futures.stream().map(CompletableFuture::join).collect(Collectors.toList());
+		CompletableFuture<List<String>> results = CompletableFuture.allOf(futuresArray).thenApply(v -> {
+			// return futures.stream().map(f -> f.join()).collect(Collectors.toList());
+			return futures.stream().map(CompletableFuture::join).collect(Collectors.toList());
 
 		});
 		List<String> objs = results.get();
@@ -82,10 +85,10 @@ public class main {
 			System.out.println("VVV " + s);
 		});
 		future3.get();
-		
+
 		// 둘다 호출을 하는데, 둘 중 하나 먼저 호출되어 끝나는 것 처리한다.
 		CompletableFuture<Void> future4 = CompletableFuture.anyOf(aoHello, aoWorld).thenAccept(System.out::println);
-		future3.get();
+		future4.get();
 
 		// 비동기 처리작업을 하는데 에러가 발생하면..
 		boolean throwError = true;

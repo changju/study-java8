@@ -77,10 +77,12 @@ public class main {
 		DateTimeFormatter MMddyyyy = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 		System.out.println("MMddyyyy: " + nowDateTime.format(MMddyyyy));
 
-		// 파싱하
+		// 파싱하기.
+		System.out.println("== 파싱하기 ===");;
 		LocalDate parse = LocalDate.parse("07/15/1982", MMddyyyy);
-		LocalDate plusDate = parse.plus(10, ChronoUnit.DAYS);
+		LocalDate plusDate = parse.plus(30, ChronoUnit.DAYS);
 		System.out.println(parse);
+		System.out.println(plusDate);
 
 		// 레거시 API 지원
 		Date date = new Date();

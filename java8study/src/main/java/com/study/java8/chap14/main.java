@@ -35,9 +35,9 @@ public class main {
 		
 		// cancel 후 get을 하여 가져올 수 없다. cancel 상태에서 만약 get을 호출하면 Exception이 발생한다.
 		//submit.cancel(true); // 현재 진행 중인 작업을 인터럽트 하며 종료
-		//submit.cancel(false); // 현재 진행중인 작업을 기다리며 종
+		//submit.cancel(false); // 현재 진행중인 작업을 기다리며 종료
 		
-		// Future 의 get() 은 결과 값을 가져올때까지 가다리는 블록킹 콜이다.
+		// Future 의 get() 은 결과 값을 가져올때까지 기다리는 블록킹 콜이다.
 		// 마냥 기다릴 수 없으니 isDone() 으로 완료 여부를 알 수 있다.
 		String retVal = submit.get(); // 결과 값을 가져올때까지 기다리는 블록킹 콜이다.
 		

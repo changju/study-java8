@@ -26,7 +26,7 @@ public class main {
 		CompletableFuture<String> cFuture2 = CompletableFuture.completedFuture("cjlee2");
 		System.out.println(cFuture2.get());
 		
-		// return 이 없는 작업을 할 경, future 만 정의한 것이기 때문에 아무런 일이 발생하지 않는다. 
+		// return 이 없는 작업을 할 경우, future 만 정의한 것이기 때문에 아무런 일이 발생하지 않는다. 
 		// 작업이 수행이 이뤄지기 위해서는 (실행을 하게 하기 위해서는) get 같은 것으로 호출을 해줘야 한다.
 		// 아래 CompletaFunture 는 Runnable
 		CompletableFuture<Void> cFuture3 = CompletableFuture.runAsync(() -> {
@@ -89,7 +89,7 @@ public class main {
 		}, executorService2).thenRun(() -> {
 			System.out.println("thenRun Hello8: " + Thread.currentThread().getName()); // main thread.
 		});
-		System.out.println(cFuture8.get());
+		System.out.println("cFuture8: "+cFuture8.get());
 		executorService2.shutdown();
 		
 		// fork join poll 이 아닌 만든것을 직접 사용하기.
@@ -99,7 +99,7 @@ public class main {
 		}, executorService3).thenRun(() -> {
 			System.out.println("thenRun Hello9: " + Thread.currentThread().getName()); // main thread
 		});
-		System.out.println(cFuture9.get());
+		System.out.println("cFuture9: " + cFuture9.get());
 		executorService3.shutdown();
 		
 		// fork join poll 이 아닌 만든것을 직접 사용하기.
@@ -110,7 +110,7 @@ public class main {
 		}, executorService4).thenRunAsync(() -> {
 			System.out.println("thenRunAsync Hello10: " + Thread.currentThread().getName()); // main thread 가 아님.
 		}, executorService4);
-		System.out.println(cFuture10.get());
+		System.out.println("cFuture10: " + cFuture10.get());
 		executorService4.shutdown();
 		
 	}
