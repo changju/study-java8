@@ -1,4 +1,4 @@
-package com.study.java8.chat17.s2;
+package com.study.java8.chap17.s2;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.stream.Collectors;
 
-import com.study.java8.chat17.s2.Shop;
+import com.study.java8.chap17.s2.Shop;
 
 // https://pjh3749.tistory.com/280
 public class PriceFinder {

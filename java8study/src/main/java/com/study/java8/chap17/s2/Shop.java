@@ -1,4 +1,4 @@
-package com.study.java8.chat17.s1;
+package com.study.java8.chap17.s2;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;

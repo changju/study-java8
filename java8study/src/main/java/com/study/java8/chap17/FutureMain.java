@@ -1,4 +1,4 @@
-package com.study.java8.chat17;
+package com.study.java8.chap17;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;

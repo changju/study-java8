@@ -1,6 +1,6 @@
-package com.study.java8.chat17.s3;
+package com.study.java8.chap17.s3;
 
-import com.study.java8.chat17.s3.PriceFinder;
+import com.study.java8.chap17.s3.PriceFinder;
 
 public class Client {
 	public static void main(String[] args) {

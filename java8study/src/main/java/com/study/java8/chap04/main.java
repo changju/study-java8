@@ -52,9 +52,9 @@ public class main {
 		Arrays.sort(names, (o1, o2) -> 0 );
 		// 자기자신의 문자열과 파라미터로 받은 문자열간의 비교를 해서 정렬하는 compareToIgnoreCase
 		// * 많이 해깔리는 포인트임!!!
-		// 이경우는 임의 객체의 인스턴스 메소드 참조하는 경우이다. 형태는 "타입::인스턴스 메소드" 를 따른다.
-		// 즉 위의 o1이 "C" 라는 임의의 객체로 되어지고 인자로 "B"가 들어온다.
-		//       o1에 "B" 라는 임의의 객체로 되어지고 인자로 "A"가 들어온다.
+		//  이경우는 임의 객체의 인스턴스 메소드 참조하는 경우이다. 형태는 "타입::인스턴스 메소드" 를 따른다.
+		//  즉 위의 o1이 "C" 라는 임의의 객체로 되어지고 인자로 "B"가 들어온다.
+		//        o1에 "B" 라는 임의의 객체로 되어지고 인자로 "A"가 들어온다.
 		Arrays.sort(names, String::compareToIgnoreCase );
 		System.out.println(Arrays.toString(names));
 

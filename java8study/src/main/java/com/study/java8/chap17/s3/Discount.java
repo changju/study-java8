@@ -1,4 +1,4 @@
-package com.study.java8.chat17.s3;
+package com.study.java8.chap17.s3;
 
 public class Discount {
 
